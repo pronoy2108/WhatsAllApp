@@ -14,7 +14,7 @@ if (reactRoot) {
     L('Polling Wapp DOM')
     let pollCounter = 0
     const wappDomTimer = setInterval(function() {
-        if (document.getElementsByClassName('app').length > 0) {
+        if (document.querySelector('[aria-label="Chat list. Press right arrow key on a chat to open chat context menu."]')) {
             clearInterval(wappDomTimer)
             L('Wapp DOM is ready!')
             initApi().then(() => {
@@ -23,7 +23,7 @@ if (reactRoot) {
                     reactRoot
                 )
             })
-
+            
         } else {
             L('Waiting for Wapp DOM...')
         }
