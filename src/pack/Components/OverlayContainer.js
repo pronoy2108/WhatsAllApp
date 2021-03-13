@@ -76,7 +76,7 @@ class OverlayContainer extends Component {
         super(props)
 
         if (process.env.NODE_ENV === 'development') {
-            styleBootstrap.use()
+            //styleBootstrap.use()
             this.state = {
                 isMainContentVisible: true,
                 bootstrapRefs: 1,

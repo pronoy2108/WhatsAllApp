@@ -34,7 +34,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 use: [
-                    "style-loader/useable", // creates style nodes from JS strings
+                    "style-loader", // creates style nodes from JS strings
                     "css-loader", // translates CSS into CommonJS
                     "sass-loader" // compiles Sass to CSS, using Node Sass by default
                 ]
@@ -58,11 +58,13 @@ module.exports = {
     plugins: [
         new WriteFilePlugin(),
         new CopyWebpackPlugin(
-            [
-                { from: 'src/manifest.json'},
-                { from: 'src/popup.html'},
+            {
+            patterns: [
+                { from: 'src/manifest.json', to: 'manifest.json'},
+                { from: 'src/popup.html', to: 'popup.html'},
                 { from: 'src/images', to: 'images'},
             ]
+        }
         )
     ]
 }
