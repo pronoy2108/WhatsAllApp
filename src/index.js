@@ -17,12 +17,13 @@ if (reactRoot) {
         if (document.querySelector('[aria-label="Chat list. Press right arrow key on a chat to open chat context menu."]')) {
             clearInterval(wappDomTimer)
             L('Wapp DOM is ready!')
-            initApi().then(() => {
-                ReactDOM.render(
-                    <AppContainer/>,
-                    reactRoot
-                )
-            })
+            initApi()
+            L('initApi finished!')
+            return (ReactDOM.render(
+                <AppContainer/>,
+                reactRoot
+            ))
+
             
         } else {
             L('Waiting for Wapp DOM...')

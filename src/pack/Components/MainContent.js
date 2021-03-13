@@ -98,10 +98,10 @@ class MainContent extends Component {
 
             this.state.accounts.forEach((origAccount) => {
                 const account = origAccount
-
+                const api = getApi()
                 // 1. Online status
-                const model = getApi().WLAPStore.Presence.models
-                    .find((x) => x.__x_id.user === account.phoneNr.toString())
+                const collection = new api.WLAPStore.PresenceCollection()
+                const model = collection.models.find((x) => x.__x_id.user === account.phoneNr.toString())
                 if (model && model.isOnline) {
                     L(account.phoneNr + ' is online')
                     account.lastSeen = new Date()
@@ -114,17 +114,20 @@ class MainContent extends Component {
         const hydraterFastId = setInterval(hydraterFast, 10750)
         hydraterFast()
 
-        // Attributes to check every 3600s
+        //Attributes to check every 3600s
         const hydraterSlow = () => {
             L('Hydrating 3600s')
             this.state.accounts.forEach((origAccount) => {
                 const account = origAccount
+                const api = getApi()
 
                 // 1. Profile picture
                 const profilePicFind = () => {
                     const hydratedAccounts = this.state.accounts
                     const index = hydratedAccounts.findIndex((stateAcc) => stateAcc.phoneNr === account.phoneNr)
-                    getApi().WLAPStore.ProfilePicThumb.find(account.phoneNr + '@c.us').then((response) => {
+                    const picCollection = new api.WLAPStore.ProfilePicThumbCollection()
+
+                    picCollection.find(account.phoneNr + '@c.us').then((response) => {
                         hydratedAccounts[index].photoUrl = response.imgFull
                         this.setStaleAccounts(hydratedAccounts)
                     }, (response) => {
@@ -136,7 +139,8 @@ class MainContent extends Component {
 
                 // 2. Status text
                 const statusFind = () => {
-                    getApi().WLAPWAPStore.default.statusFind(account.phoneNr + '@c.us').then((response) => {
+                    
+                    api.WLAPWAPStore.statusFind(account.phoneNr + '@c.us').then((response) => {
                         const hydratedAccounts = this.state.accounts
                         const index = hydratedAccounts.findIndex((stateAcc) => stateAcc.phoneNr === account.phoneNr)
                         hydratedAccounts[index].statusTxt = response.status
@@ -152,7 +156,9 @@ class MainContent extends Component {
 
                 // 3. Name
                 const displayNameFind = () => {
-                    getApi().WLAPStore.Contact.find(account.phoneNr + '@c.us').then((response) => {
+                    const contactCollection = new api.WLAPStore.ContactCollection()
+
+                    contactCollection.find(account.phoneNr + '@c.us').then((response) => {
                         const hydratedAccounts = this.state.accounts
                         const index = hydratedAccounts.findIndex((stateAcc) => stateAcc.phoneNr === account.phoneNr)
                         hydratedAccounts[index].displayName = response.isMyContact ? response.formattedName : undefined
@@ -168,7 +174,7 @@ class MainContent extends Component {
 
         this.setState({
             hydraterFastId: hydraterFastId,
-            hydraterSlowId: hydraterSlowId
+            //hydraterSlowId: hydraterSlowId
         })
     }
 
@@ -181,7 +187,7 @@ class MainContent extends Component {
     subscribeToPresence() {
         L(`Subscribing to WAPP presence`)
         this.state.accounts.forEach((account) => {
-            getApi().WLAPWAPStore.default.subscribePresence( account.phoneNr + '@c.us')
+            getApi().WLAPWAPStore.subscribePresence( account.phoneNr + '@c.us')
         })
     }
 

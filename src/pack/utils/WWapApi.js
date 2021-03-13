@@ -4,66 +4,54 @@ if (process.env.NODE_ENV === 'development') {
     window.WAA_Api = Api
 }
 
-export const initApi = () => {
+function fetchContent(url) {
     return new Promise((resolve, reject) => {
-        /*
-        *  There are 2 stores that need initializing: WLAPStore and WLAPWAPStore.
-        *  From the WA DOM we extract 2 scrips, download and regex them to search
-        *  for the correct function names in the webpacked WA javascripts.   *
-        *
-        * */
-
-        const scripts = document.getElementsByTagName('script')
-        const regexApp = /\/app3\..+.js/
-        let appScriptUrl
-
-        // Derive script urls
-        for (let i = 0; i < scripts.length; i++) {
-            const src = scripts[i].src
-            if (regexApp.exec(src) != null) {
-                appScriptUrl = src
-            }
-
-        }
-
-        // Download scripts, regex them and assign store
-        fetch(appScriptUrl).then(e => {
+        fetch(url).then(e => {
             const reader = e.body.getReader()
-            let js_src = ""
-
-            return reader.read().then(function readMore({done, value}) {
+            let srcContent = ''
+            reader.read().then(function readMore({done, value}) {
                 const td = new TextDecoder("utf-8")
                 const str_value = td.decode(value)
                 if (done) {
-                    js_src += str_value
-                    const regExDynNameStore1 = /Wap:[a-z]\("(\w+)"\)/
-                    const res1 = regExDynNameStore1.exec(js_src)
-                    const funcName1 = res1[1]
-
-                    const WLAPWAPStore = window.webpackJsonp([], {[funcName1]: (x, y, z) => {
-                    }}, [funcName1])
-                    Api.WLAPWAPStore = WLAPWAPStore
-
-                    const regExDynNameStore2 = /(\w+):function\(e,t,i\)\{\"use strict\";e\.exports=\{AllStarredMsgs:/
-                    const res2 = regExDynNameStore2.exec(js_src)
-                    const funcName2 = res2[1]
-
-                    const WLAPStore = window.webpackJsonp([], {[funcName2]: (x, y, z) => {
-                    }}, [funcName2])
-                    Api.WLAPStore = WLAPStore
-                    resolve()
-
+                    resolve(srcContent)
                     return
                 }
-
-                js_src += str_value
+    
+                srcContent += str_value
                 return reader.read().then(readMore)
-
+    
+            }).catch(() => {
+                console.log('Could not load servicworker.js')
+                reject()
             })
-
         })
+    })  
+}
 
-    })
+export const initApi = () => {
+    Api.WLAPStore = {}
+    window.webpackChunkbuild.push([
+        ['bla2'], {}, function(e) {
+          Object.keys(e.m).forEach(function(mod) {
+            const res = e(mod);
+            if (res && res.Wap) { 
+                Api.WLAPWAPStore = new res.Wap() // Is Check
+            }
+            if (res && res.ContactCollection) {
+                Api.WLAPStore.ContactCollection = res.ContactCollection
+            }
+            if (res && res.PresenceCollection) { 
+                Api.WLAPStore.PresenceCollection = res.PresenceCollection
+            }
+            if (res && res.ProfilePicThumbCollection) { 
+                Api.WLAPStore.ProfilePicThumbCollection = res.ProfilePicThumbCollection
+            }
+          })
+        }
+      ]);
+
+      return new Promise((resolve, reject) => {resolve()})
+    
 }
 
 export const getApi = () => {
