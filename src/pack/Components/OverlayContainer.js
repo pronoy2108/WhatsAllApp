@@ -125,7 +125,7 @@ class OverlayContainer extends Component {
         return (
             <StyledContainer>
                 <MainContent demoMode={this.props.demoMode} isOpen={this.state.isMainContentVisible}/>
-                <TopBar>WhatsAllApp Community Editon 0.0.1</TopBar>
+                <TopBar>WhatsAllApp Community Editon 0.0.2</TopBar>
                 {button}
             </StyledContainer>
         )
