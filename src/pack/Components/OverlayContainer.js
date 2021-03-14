@@ -4,8 +4,15 @@ import styleBootstrap from '../assets/bootstrap/bootstrap.useable.scss'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons'
 import MainContent from './MainContent'
+//console.log(styleBootstrap)
 
 
+function enableStyles () {
+    document.getElementById('waaStyleTag').setAttribute('media', 'all')
+}
+function disableStyles () {
+    document.getElementById('waaStyleTag').setAttribute('media', 'not all')
+}
 
 
 const StyledContainer = styled.div`
@@ -74,9 +81,11 @@ const SlideButtonUp = styled.div`
 class OverlayContainer extends Component {
     constructor(props) {
         super(props)
+        
+        disableStyles()
 
         if (process.env.NODE_ENV === 'development') {
-            //styleBootstrap.use()
+            enableStyles()
             this.state = {
                 isMainContentVisible: true,
                 bootstrapRefs: 1,
@@ -99,11 +108,14 @@ class OverlayContainer extends Component {
 
 
             if (willBeVisible) {
-                styleBootstrap.use()
+                enableStyles()
                 bootstrapRefs += 1
             } else {
                 if (bootstrapRefs > 0) {
-                    setTimeout(styleBootstrap.unuse, "1500")
+                    setTimeout(() => {
+                        disableStyles()
+                    }, 1500)
+                    
                     bootstrapRefs -= 1
                 }
 
