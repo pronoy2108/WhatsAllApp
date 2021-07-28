@@ -1,4 +1,4 @@
-⚠ Lately WhatsApp changes all kinds of things meaning I have to bug fix this repo more often. I do this for free but I'm thinking about making this repo read-only which means **I no longer will support this repo anymore** unless there is some kind of financial incentive.
+⚠ Lately WhatsApp has been changing a lot of things to their undocumented api. That means I have to bug fix this repo more often. I do this for free but I'm thinking about making this repo read-only which means **I no longer will support this repo** unless there is some kind of financial incentive.
 
 For me it's better to invest my time in paid projects. Please, think about donating to me so I can continue to work on this project 😊: [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PHVYMCEVZNLPA)
 
