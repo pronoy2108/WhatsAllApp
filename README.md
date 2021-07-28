@@ -1,3 +1,7 @@
+⚠ Lately WhatsApp changes all kinds of things meaning I have to bug fix this repo more often. I do this for free but I'm thinking about making this repo read-only which means **I no longer will support this repo anymore** unless there is some kind of financial incentive.
+
+For me it's better to invest in paid projects. Please, think about donating to me so I can continue to work on this project 😊: [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PHVYMCEVZNLPA)
+
 # WhatsAllApp Community edition
 
 WhatsAllApp is a Chrome extension which creates an overlay of extra information on top of WhatsApp web. This is the community edition and  at this moment it enumerates and shows the following information:
@@ -9,10 +13,6 @@ WhatsAllApp is a Chrome extension which creates an overlay of extra information 
 When a WhatsApp contact comes online, the corresponding entry will have a green background and the 'last seen' entry is updated.
 
 You can download a zip file of the currently displayed accounts. The file contains a .csv file and jpegs of all the displayed profile pictures.
-
-Do you like WhatsAllApp and do you want to give me a little support? Consider sponsoring me, you can click on the donate button 😊	
-
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PHVYMCEVZNLPA)
 
 ![shot_10](https://user-images.githubusercontent.com/12978070/44982248-8576f400-af75-11e8-993c-1ce25af3c3d4.png) 
 ![shot_11](https://user-images.githubusercontent.com/12978070/44982251-860f8a80-af75-11e8-9f09-32057eeaaa82.png)
