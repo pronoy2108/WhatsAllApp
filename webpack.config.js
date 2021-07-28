@@ -4,6 +4,7 @@ const WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
     mode: 'development',
+    devtool: false,
     entry: {
         bundle: './src/index.js',
         injector: './src/injector.js',

@@ -1,35 +1,38 @@
 {
   "name": "WhatsAllApp Community Edition",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "UI overlay for WhatsApp Web to enumerate phone numbers, profile pics, online statuses and status texts.",
-  "permissions": ["declarativeContent", "activeTab", "storage"],
+  "manifest_version": 3,
   "background": {
-    "scripts": ["background.js"],
-    "persistent": false
+    "service_worker": "background.js"
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
-  "web_accessible_resources" : ["/bundle.js"],
-  "manifest_version": 2,
-  "page_action": {
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  },
+  "permissions": ["storage", "declarativeContent", "activeTab"],
+  "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "images/icon_16x.png",
-      "32": "images/icon_32x.png",
-      "48": "images/icon_48x.png",
-      "128": "images/icon_128x.png"
+      "16": "/images/icon_16x.png",
+      "32": "/images/icon_32x.png",
+      "48": "/images/icon_48x.png",
+      "128": "/images/icon_128x.png"
     }
   },
   "icons": {
-    "16": "images/icon_16x.png",
-    "32": "images/icon_32x.png",
-    "48": "images/icon_48x.png",
-    "128": "images/icon_128x.png"
+    "16": "/images/icon_16x.png",
+    "32": "/images/icon_32x.png",
+    "48": "/images/icon_48x.png",
+    "128": "/images/icon_128x.png"
   },
+  "web_accessible_resources": [{
+    "resources": ["/bundle.js"],
+    "matches": ["https://web.whatsapp.com/*"]
+  }],
   "content_scripts": [
     {
       "matches": ["https://web.whatsapp.com/*"],
       "js": [ "injector.js" ],
       "run_at": "document_end"
     } ]
-
 }
