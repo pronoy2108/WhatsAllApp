@@ -30,7 +30,7 @@ function fetchContent(url) {
 
 export const initApi = () => {
     Api.WLAPStore = {}
-    window.webpackChunkbuild.push([
+    window.webpackChunkwhatsapp_web_client.push([
         ['bla2'], {}, function(e) {
           Object.keys(e.m).forEach(function(mod) {
             const res = e(mod);

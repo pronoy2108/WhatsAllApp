@@ -16,7 +16,7 @@ if (reactRoot) {
     const wappDomTimer = setInterval(function() {
         if (!document.querySelector('#startup')) {
             clearInterval(wappDomTimer)
-            L('Wapp DOM is ready!')
+            L('Wapp DOM is ready!!')
             initApi()
             L('initApi finished!')
             return (ReactDOM.render(
